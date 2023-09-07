@@ -22,7 +22,7 @@ export class App extends Component {
         this.setState({ [name]: value });
       };
     
-      handleSubmit = evt => {
+    handleSubmit = evt => {
         evt.preventDefault();
         this.setState((prev) => ({
             contacts: [...prev.contacts,
@@ -34,7 +34,13 @@ export class App extends Component {
             ],
             departure: true,
         }));    
-      };
+    };
+
+    handDelete = (id) =>  {
+      this.setState((prev) => ({
+        contacts: prev.filter((el) => el.id !==id),
+      }))
+    }
     
 
   render() {
@@ -47,7 +53,7 @@ export class App extends Component {
               <Phonebook formThis={this}/>
               <h2>Contacts</h2>
               <Filter formThis={this}/>
-              {this.state.departure ? <Contacts contact={this.state} /> : ""}
+              {this.state.departure ? <Contacts contact={this.state} handDelete={this.handDelete}/> : ""}
           </div>
       );
   }

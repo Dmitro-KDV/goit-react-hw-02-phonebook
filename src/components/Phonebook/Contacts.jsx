@@ -1,7 +1,7 @@
 export const Contacts = ({contact}) => {
     return ( 
             <li>{contact.name}: {contact.number}
-                <button type='button'>Delete</button>
+                <button type='button' onClick={()=>handDelete(contact.contacts.id)}>Delete</button>
             </li>
     );
 }
