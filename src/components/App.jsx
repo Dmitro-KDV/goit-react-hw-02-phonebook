@@ -1,6 +1,7 @@
 import {FormaPhonebook} from 'components/Phonebook/FormaPhonebook'
 import {Contacts} from 'components/Phonebook/Contacts'
 import {Filter} from 'components/Phonebook/Filter'
+import {Container} from './Phonebook/Phonebook.stiled';
 import { nanoid } from "nanoid";
 import { Component } from 'react'
 
@@ -36,9 +37,15 @@ export class App extends Component {
   }
 
   handDelete = (id) =>  {
-    this.setState((prev) => ({
-      contacts: prev.contacts.filter((el) => el.id !== id),
-    }));
+    if (this.state.filter) {
+      this.setState((prev) => ({
+        filter: prev.contacts.filter((el) => el.id !== id),
+      }));
+    } else {
+      this.setState((prev) => ({
+        contacts: prev.contacts.filter((el) => el.id !== id),
+      }));
+    }
   }
 
   filterContacts = (filterName) => {
@@ -49,13 +56,13 @@ export class App extends Component {
 
   render() {
       return (
-          <div>
+          <Container>
               <h2>Phonebook</h2>
               <FormaPhonebook creatContacts={this.creatContacts}/>
               <h2>Contacts</h2>
               <Filter filterContacts={this.filterContacts}/>
               <Contacts contact={this.state} handDelete={this.handDelete}/>
-          </div>
+          </Container>
       );
   }
 };

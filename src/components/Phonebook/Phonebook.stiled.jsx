@@ -4,6 +4,7 @@ export const Form = styled.form`
    width: 400px;
    border: 1px solid #2a2a2a;
    padding: 8px;
+   border-radius: 5px;
 `;
 
 export const Label = styled.label`
@@ -13,12 +14,17 @@ export const Label = styled.label`
   width: 150px;
 `;
 
-export const contactList = styled.ul`
+export const ContactList = styled.li`
+   display: flex;
+   justify-content: space-between;
    width: 350px;
-   margin-left: 30px;
-   margin-top: 20px;
 `;
 
-export const btnDelete = styled.button`
-   margin-left: 20px;
+export const ContactItem = styled.ul`
+   margin: 8px 0;
 `;
+
+export const Container = styled.ul`
+   margin: 0 auto;
+`;
+
