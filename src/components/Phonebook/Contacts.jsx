@@ -1,13 +1,15 @@
+import {contactList, btnDelete} from './Phonebook.stiled';
+
 export const Contacts = ({contact, handDelete}) => {
     return ( 
-        <ul>
-            {contact.contacts.map((el) => 
+        <contactList>
+            {(contact.filter ?? contact.contacts).map((el) => 
             <ul key = {el.id}>
                 <li>{el.name}: {el.number}   
-                    <button type='button' onClick={()=>handDelete(el.id)}>Delete</button>
+                    <btnDelete type='button' onClick={()=>handDelete(el.id)}>Delete</btnDelete>
                 </li>
             </ul>
             )}
-        </ul>    
+        </contactList>    
     );
 }

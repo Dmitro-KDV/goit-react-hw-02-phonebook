@@ -11,9 +11,6 @@ const INITIAL_STATE = {
       {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
       {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
     ],
-    // name: '',
-    // number: '',
-    // filter: '',
 }
 
 
@@ -21,42 +18,43 @@ export class App extends Component {
 
   state = {
     ...INITIAL_STATE,
-      // contacts: [], 
-      // departure: false,
+    filter: null,
   }
 
 
   creatContacts = (body) => {
+    const  isAlredyContacts = this.state.contacts.find(el => el.name === body.name);
+    if (isAlredyContacts) return alert(`${body.name} is alredy in contacts.`)
+    
+    const newContacts = {
+      ...body,
+      id: nanoid(),
+    }
     this.setState((prev) => ({
-            contacts: [
-                      ...prev.contacts,
-                      {
-                        id: nanoid(),
-                        ...body,
-                      },
-            ],
-            // departure: true,
-        }));    
+      contacts: [newContacts, ...prev.contacts],
+    }))
   }
 
   handDelete = (id) =>  {
     this.setState((prev) => ({
-      contacts: prev.filter((el) => el.id !== id),
+      contacts: prev.contacts.filter((el) => el.id !== id),
+    }));
+  }
+
+  filterContacts = (filterName) => {
+    this.setState((prev) => ({
+      filter: prev.contacts.filter((el) => el.name.toLowerCase().includes(filterName.toLowerCase())),
     }));
   }
 
   render() {
-    // const { name, number, departure, contacts } = this.state;
-    // console.log(`name: ${name}, number: ${number}, departure: ${departure}, contacts: ${contacts}`);
-        console.log(this.state)
       return (
           <div>
               <h2>Phonebook</h2>
               <FormaPhonebook creatContacts={this.creatContacts}/>
               <h2>Contacts</h2>
-              <Filter formThis={this}/>
+              <Filter filterContacts={this.filterContacts}/>
               <Contacts contact={this.state} handDelete={this.handDelete}/>
-              {/* {this.state.departure ? <Contacts contact={this.state} handDelete={this.handDelete}/> : ""} */}
           </div>
       );
   }

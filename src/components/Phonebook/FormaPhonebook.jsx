@@ -1,11 +1,13 @@
 import {Form, Label} from './Phonebook.stiled';
 import { Component } from 'react'
 
+const INITIAL_STATE = {
+    name: '',
+    number: '',
+}
+
 export class FormaPhonebook extends Component {
-    state = {
-        name: '',
-        number: '',
-    }
+    state = INITIAL_STATE
 
     handleChange = evt => {
         const { name, value } = evt.target;
@@ -14,7 +16,10 @@ export class FormaPhonebook extends Component {
 
     handleSubmit = evt => {
         evt.preventDefault();
+        if (!this.state.name.trim() || !this.state.number.trim()) 
+            return this.setState(INITIAL_STATE);
         this.props.creatContacts(this.state);
+        this.setState(INITIAL_STATE);
     };
       
     render() {
