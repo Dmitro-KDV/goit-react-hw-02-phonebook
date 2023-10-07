@@ -14,13 +14,12 @@ const INITIAL_STATE = {
     ],
 }
 
-export class App extends Component {
 
+export class App extends Component {
   state = {
     ...INITIAL_STATE,
     filter: null,
   }
-
 
   creatContacts = (body) => {
     const  isAlredyContacts = this.state.contacts.find(el => el.name === body.name);
